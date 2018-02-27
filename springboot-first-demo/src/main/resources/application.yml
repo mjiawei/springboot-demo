@@ -1,0 +1,40 @@
+test:
+  user:
+    username : song
+    age : 18
+    toString: the age of ${test.user.username} is ${test.user.age}
+
+mybatis:
+  #mapper-locations: classpath:com/jiawei/mapper/*.xml
+  #config-location: classpath:mybatis/mybatis-config.xml
+
+#spring:
+  #datasource:
+    #driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://127.0.0.1:3306/db_test?characterEncoding=utf8&useSSL=true
+    #username: root
+    #password: root
+
+#配置日志
+logging:
+  #配置日志文件路径
+  path: D:\opt\logs
+  level:
+    root: info #不同目录下的日志可配置不同级别
+    org.springfromework.web: info
+    com.jiawei.mapper: debug
+
+
+mail:
+  smtp:
+    auth: true
+    port: 465
+    timeout: 5000
+  transport:
+    protocol: smtp
+  send.charset: UTF-8
+  is.ssl: true
+  host: smtp.163.com
+  auth.name: maileverybody@163.com
+  auth.password: sjw3511
+  smtp.timeout: 5000
