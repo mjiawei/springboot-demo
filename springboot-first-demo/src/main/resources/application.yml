@@ -6,7 +6,7 @@ test:
 
 mybatis:
   #mapper-locations: classpath:com/jiawei/mapper/*.xml
-  #config-location: classpath:mybatis/mybatis-config.xml
+  config-location: classpath:mybatis/mybatis-config.xml
 
 #spring:
   #datasource:
@@ -38,3 +38,4 @@ mail:
   auth.name: maileverybody@163.com
   auth.password: sjw3511
   smtp.timeout: 5000
+

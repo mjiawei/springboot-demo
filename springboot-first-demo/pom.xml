@@ -98,6 +98,16 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>4.1.9.RELEASE</version>
 		</dependency>
+		<!-- Spring Boot Redis 依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!-- Spring Boot Cache 依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

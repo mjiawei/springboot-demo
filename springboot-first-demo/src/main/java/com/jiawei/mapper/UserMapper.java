@@ -2,14 +2,17 @@ package com.jiawei.mapper;
 
 import com.jiawei.bean.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@CacheConfig(cacheNames = "user")
 public interface UserMapper {
-
-    User getUserById(Integer id);
+    @Cacheable
+    User getUserById(String id);
 
     List<User> getUserList();
 
