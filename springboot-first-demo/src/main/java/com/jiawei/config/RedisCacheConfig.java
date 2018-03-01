@@ -1,5 +1,7 @@
 package com.jiawei.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -16,6 +18,13 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.ShardedJedisPool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,12 +37,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @PropertySource(value = "classpath:redis.properties")
 public class RedisCacheConfig extends CachingConfigurerSupport{
 
+    private static final Logger logger = LoggerFactory.getLogger(RedisCacheConfig.class);
+
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.port}")
     private int port;
     @Value("${spring.redis.timeout}")
     private int timeout;
+
+    @Value("${spring.redis.pool.max-idle}")
+    private int maxIdle;
+
+    @Value("${spring.redis.pool.max-wait}")
+    private long maxWaitMillis;
+
+//    @Value("${spring.redis.password}")
+//    private String password;
+
+
 
     //自定义缓存key生成策略
 //    @Bean
@@ -75,4 +97,17 @@ public class RedisCacheConfig extends CachingConfigurerSupport{
         jackson2JsonRedisSerializer.setObjectMapper(om);
         template.setValueSerializer(jackson2JsonRedisSerializer);
     }
+    @Bean
+    public JedisPool redisPoolFactory() {
+        logger.info("JedisPool注入成功！！");
+        logger.info("redis地址：" + host + ":" + port);
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+        jedisPoolConfig.setMaxIdle(maxIdle);
+        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
+
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, host, port, timeout);
+
+        return jedisPool;
+    }
+
 }
