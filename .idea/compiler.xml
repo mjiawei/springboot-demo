@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springboot-first-demo" />
+        <module name="eurekaserver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="eurekaserver" target="1.8" />
       <module name="springboot-first-demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
